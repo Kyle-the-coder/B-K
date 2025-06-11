@@ -28,38 +28,45 @@ body {
 }
 
 @font-face {
-  font-family: "Outfit";
-  src: url("./Outfit-VariableFont_wght.ttf") format("truetype");
+  font-family: "Archivo";
+  src: url("./ArchivoBlack-Regular.ttf") format("truetype");
 }
 @font-face {
-  font-family: "Playfair";
-  src: url("./Playfair-VariableFont_opsz,wdth,wght.woff2") format("woff2");
+  font-family: "Protest";
+  src: url("./ProtestRiot-Regular.ttf") format("woff2");
   font-weight: 1 999;
   font-stretch: 75% 125%;
   font-style: normal;
 }
-.outfit-font {
+.archivo-font {
   font-family: "Outfit", sans-serif;
 }
-.outfit-thin-font {
+.archivo-thin-font {
   font-family: "Outfit", sans-serif;
   font-weight: 400;
 }
-.outfit-xthin-font {
+.archivo-xthin-font {
   font-family: "Outfit", sans-serif;
   font-weight: 200;
 }
-.playfair-font {
+.protest-font {
   font-family: "Playfair";
   font-weight: 800;
 }
-.playfair-thin-font {
+.protest-thin-font {
   font-family: "Playfair";
   font-weight: 400;
 }
 
-.green-bg {
-  background-color: #c1ff72;
+.red-bg {
+  background-color: #f50000;
+}
+.orange-bg {
+  background-color: #ef9104;
+}
+
+.red-org-gradient {
+  background: linear-gradient(to right #f50000 0%, #ef9104 100%);
 }
 .dark-silver-bg {
   background-color: #656565;

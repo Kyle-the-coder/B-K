@@ -1,5 +1,5 @@
 import { Outlet, useLocation, useNavigation } from "react-router-dom";
-// import { Nav } from "../components/Nav/Nav";
+import { Nav } from "../components/Nav/Nav";
 // import { Footer } from "../components/Footer/Footer";
 // import { Loader } from "../components/Loader/Loader";
 
@@ -8,7 +8,7 @@ export function MainLayout() {
 
   return (
     <div className="main-container">
-      {/* <Nav /> */}
+      <Nav />
       {state === "loading" ? (
         {
           /* <Loader /> */
