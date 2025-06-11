@@ -7,7 +7,6 @@ import { Hamburger } from "../Hamburger/Hamburger";
 import logo from "../../assets/logo/b-k.png";
 import fb from "../../assets/icons/facebookBlack.png";
 import insta from "../../assets/icons/instagramBlack.png";
-import linked from "../../assets/icons/linkedinBlack.png";
 import gsap from "gsap";
 import "./nav.css";
 
@@ -104,7 +103,7 @@ export function Nav() {
   }, [isHamburgerActive]);
 
   return (
-    <nav id="nav" className="nav-main-container charcoal-bg">
+    <nav id="nav" className="nav-main-container charcoal-bg ">
       {windowWidth <= 700 ? (
         <>
           <div className="logo-ham-container">
@@ -125,12 +124,12 @@ export function Nav() {
           </div>
 
           {isHamburgerActive && (
-            <div className="navbar-phone-dropdown-container dark-silver-bg">
+            <div className="navbar-phone-dropdown-container charcoal-bg">
               <div className="dropdown-links-container">
                 {links.map((link, index) => (
                   <div key={link.linkName}>
                     <h3
-                      className="outfit-font dropdown-link-name "
+                      className="archivo-font dropdown-link-name "
                       onClick={() => {
                         handleMouseEnter(index);
                         handleScrollTo(link.link);
@@ -163,7 +162,7 @@ export function Nav() {
                   key={link.linkName}
                   className="link-container"
                 >
-                  <h1 className="outfit-font">{link.linkName}</h1>
+                  <h1 className="archivo-font">{link.linkName}</h1>
                   {hoverIndex === index && <div className="active"></div>}
                 </div>
               ))}
@@ -173,7 +172,6 @@ export function Nav() {
           <div className="socials ">
             <img src={fb} />
             <img src={insta} />
-            <img src={linked} />
           </div>
         </>
       )}

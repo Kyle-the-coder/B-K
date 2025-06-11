@@ -1,3 +1,8 @@
+:root {
+  --red: #f50000;
+  --orange: #ef9104;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -59,14 +64,14 @@ body {
 }
 
 .red-bg {
-  background-color: #f50000;
+  background-color: var(--red);
 }
 .orange-bg {
-  background-color: #ef9104;
+  background-color: var(--orange);
 }
 
-.red-org-gradient {
-  background: linear-gradient(to right #f50000 0%, #ef9104 100%);
+.ro-gradient {
+  background: linear-gradient(to right var(--red) 0%, var(--orange) 100%);
 }
 .dark-silver-bg {
   background-color: #656565;
