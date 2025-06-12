@@ -1,10 +1,11 @@
+import { Hero } from "../../sections/lpSections/Hero/Hero";
 import "./landing.css";
 
 function LandingPage() {
   return (
-    <>
-      <h1>Landing Page</h1>
-    </>
+    <div className="display-column">
+      <Hero />
+    </div>
   );
 }
 

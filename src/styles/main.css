@@ -72,7 +72,7 @@ body {
 }
 
 .ro-gradient {
-  background: linear-gradient(to right var(--red) 0%, var(--orange) 100%);
+  background: linear-gradient(to right, red 0%, orange 100%);
 }
 .dark-silver-bg {
   background-color: #656565;
@@ -115,11 +115,15 @@ body {
   );
 }
 
-.green-text {
-  color: #c1ff72;
+.lite-orange-text {
+  color: var(--lite-orange);
 }
-.d-green-text {
-  color: #3c6a01;
+.orange-text {
+  color: var(--orange);
+}
+
+.red-text {
+  color: var(--red);
 }
 
 .white-text {
