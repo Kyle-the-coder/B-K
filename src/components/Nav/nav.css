@@ -50,7 +50,7 @@
 }
 
 .link-container:hover {
-  color: var(--orange);
+  color: var(--lite-orange);
 }
 
 .links h1 {
@@ -85,9 +85,9 @@
   transition: all 0.2s ease-in-out;
 }
 .socials img:hover {
-  background-color: var(--red);
+  background-color: var(--lite-orange);
   filter: none;
-  border: 1px solid var(--red);
+  border: 1px solid var(--lite-orange);
   border-radius: 0.2rem;
 }
 
