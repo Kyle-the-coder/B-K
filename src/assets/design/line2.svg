@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg1"
+   inkscape:export-filename="line.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm" />
+  <defs
+     id="defs1">
+    <linearGradient
+       id="linearGradient1"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#ef9104;stop-opacity:1;"
+         offset="0"
+         id="stop1" />
+      <stop
+         style="stop-color:#f50000;stop-opacity:1;"
+         offset="1"
+         id="stop2" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1"
+       id="linearGradient2"
+       x1="50.499741"
+       y1="169.2028"
+       x2="143.32127"
+       y2="169.2028"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.9981615,0,0,2.1429626,-77.863291,-220.35167)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1"
+       id="linearGradient3"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.9981615,0,0,2.1429626,-122.46179,-192.69834)"
+       x1="50.499741"
+       y1="169.2028"
+       x2="143.32127"
+       y2="169.2028" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       d="M 206.84489,283.27314 65.026856,2.4812751 25.754321,28.220462 171.39055,252.85409 Z"
+       style="fill:url(#linearGradient2);stroke:#000000;stroke-width:1.24572;stroke-dasharray:none"
+       id="path1"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="line.svg"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       d="M 189.00752,290.43022 11.679534,14.6534 1.1261768,21.5349 154.23936,262.62771 Z"
+       style="fill:url(#linearGradient3);stroke:#000000;stroke-width:1.24572;stroke-dasharray:none"
+       id="path1-0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="line.svg"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+  </g>
+</svg>

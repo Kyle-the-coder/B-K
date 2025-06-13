@@ -4,9 +4,10 @@ import { scrollToSection } from "../SmoothScroll";
 import { useNavigate } from "react-router-dom";
 import { Hamburger } from "../Hamburger/Hamburger";
 // import { db } from "../../firebaseConfig";
-import logo from "../../assets/logo/b-k.png";
+import logo from "../../assets/logo/b-k.svg";
 import fb from "../../assets/icons/facebookBlack.png";
 import insta from "../../assets/icons/instagramBlack.png";
+import line from "../../assets/design/line2.svg";
 import gsap from "gsap";
 import "./nav.css";
 
@@ -104,76 +105,81 @@ export function Nav() {
 
   return (
     <nav id="nav" className="nav-main-container charcoal-bg ">
-      {windowWidth <= 700 ? (
-        <>
-          <div className="logo-ham-container">
-            <div className="logo">
+      <div className="nav-overflow-container">
+        <div className="nav-line ">
+          <img src={line} />
+        </div>
+
+        {windowWidth <= 900 ? (
+          <>
+            <div className="logo-ham-container">
+              <div className="logo">
+                <img
+                  src={logo}
+                  onClick={() => {
+                    navigate("/"), setHoverIndex(0);
+                  }}
+                />
+              </div>
+              <div
+                className="nav-hamburger-container "
+                onClick={() => handleActivateHamburger()}
+              >
+                <Hamburger isOpened={isAnimationActive} />
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="logo-links">
               <img
                 src={logo}
                 onClick={() => {
                   navigate("/"), setHoverIndex(0);
                 }}
               />
-            </div>
-            <div
-              className="nav-hamburger-container "
-              onClick={() => handleActivateHamburger()}
-            >
-              <Hamburger isOpened={isAnimationActive} />
-            </div>
-          </div>
-
-          {isHamburgerActive && (
-            <div className="navbar-phone-dropdown-container charcoal-bg">
-              <div className="dropdown-links-container">
+              <div className="links">
                 {links.map((link, index) => (
-                  <div key={link.linkName}>
-                    <h3
-                      className="archivo-font dropdown-link-name "
-                      onClick={() => {
-                        handleMouseEnter(index);
-                        handleScrollTo(link.link);
-                      }}
-                    >
-                      {link.linkName}
-                      {hoverIndex === index && <div className="active"></div>}
-                    </h3>
+                  <div
+                    onMouseEnter={() => handleMouseEnter(index)}
+                    onMouseLeave={handleMouseLeave}
+                    onClick={() => handleScrollTo(link.link)}
+                    key={link.linkName}
+                    className="link-container"
+                  >
+                    <h1 className="archivo-font">{link.linkName}</h1>
+                    {hoverIndex === index && <div className="active"></div>}
                   </div>
                 ))}
               </div>
             </div>
-          )}
-        </>
-      ) : (
-        <>
-          <div className="logo-links">
-            <img
-              src={logo}
-              onClick={() => {
-                navigate("/"), setHoverIndex(0);
-              }}
-            />
-            <div className="links">
-              {links.map((link, index) => (
-                <div
-                  onMouseEnter={() => handleMouseEnter(index)}
-                  onMouseLeave={handleMouseLeave}
-                  onClick={() => handleScrollTo(link.link)}
-                  key={link.linkName}
-                  className="link-container"
-                >
-                  <h1 className="archivo-font">{link.linkName}</h1>
-                  {hoverIndex === index && <div className="active"></div>}
-                </div>
-              ))}
-            </div>
-          </div>
 
-          <div className="socials ">
-            <img src={fb} />
-            <img src={insta} />
+            <div className="socials ">
+              <img src={fb} />
+              <img src={insta} />
+            </div>
+          </>
+        )}
+      </div>
+      {isHamburgerActive && (
+        <div className="navbar-phone-dropdown-container charcoal-bg">
+          <div className="dropdown-links-container">
+            {links.map((link, index) => (
+              <div key={link.linkName}>
+                <h3
+                  className="archivo-font dropdown-link-name "
+                  onClick={() => {
+                    handleMouseEnter(index);
+                    handleScrollTo(link.link);
+                  }}
+                >
+                  {link.linkName}
+                  {hoverIndex === index && <div className="active"></div>}
+                </h3>
+              </div>
+            ))}
           </div>
-        </>
+        </div>
       )}
     </nav>
   );

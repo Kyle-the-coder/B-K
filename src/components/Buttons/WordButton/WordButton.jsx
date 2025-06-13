@@ -5,7 +5,7 @@ export function WordButton({ text, fontSize, margin, onClick }) {
   const [isHover, setIsHover] = useState(false);
   return (
     <button
-      className="button-main ro-gradient archivo-font"
+      className="button-main  ro-gradient archivo-font"
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
       style={{
