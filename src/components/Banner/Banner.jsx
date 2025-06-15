@@ -28,7 +28,7 @@ export function Banner() {
         { x: totalWidth }, // Start off-screen to the right
         {
           x: -totalWidth, // Move off-screen to the left
-          duration: 50, // Adjust duration for speed
+          duration: 0, // Adjust duration for speed
           ease: "linear",
         }
       );

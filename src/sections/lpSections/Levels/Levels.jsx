@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import minus from "../../../assets/icons/remove.png";
 import plus from "../../../assets/icons/plus.png";
 import levelsBg from "../../../assets/design/levelsBg.png";
+import line from "../../../assets/design/line2.svg";
 import { WordButton } from "../../../components/Buttons/WordButton/WordButton";
 import "./levels.css";
 
@@ -58,6 +59,7 @@ export function Levels() {
         <h1 className="protest-font" style={{ textAlign: "center" }}>
           Dance is for Everyone
         </h1>
+        <img src={line} className="levels-line" />
       </div>
 
       <div className="faq-cards-container">
@@ -73,7 +75,7 @@ export function Levels() {
               backgroundColor:
                 activeIndex === index
                   ? "rgba(0, 0, 0, 0.946)"
-                  : "rgba(0, 0, 0, 0.703)",
+                  : "rgba(0, 0, 0, 0.84)",
             }}
           >
             <div className="faq-card-title">

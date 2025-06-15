@@ -4,7 +4,7 @@
   display: flex;
   justify-content: left;
   align-items: center;
-  padding: 20px 20px;
+  padding: 100px 20px;
   overflow: hidden;
   position: relative;
 }
@@ -29,8 +29,8 @@
 }
 .nl-line {
   position: absolute;
-  top: -150px;
-  left: -200px;
+  top: -250px;
+  left: -400px;
   height: 150%;
   transform: scaleX(-1);
   transition: all 0.3s;
