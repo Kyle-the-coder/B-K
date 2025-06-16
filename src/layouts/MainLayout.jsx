@@ -1,6 +1,6 @@
 import { Outlet, useLocation, useNavigation } from "react-router-dom";
 import { Nav } from "../components/Nav/Nav";
-// import { Footer } from "../components/Footer/Footer";
+import { Footer } from "../components/Footer/Footer";
 // import { Loader } from "../components/Loader/Loader";
 
 export function MainLayout() {
@@ -18,7 +18,7 @@ export function MainLayout() {
           <Outlet />
         </div>
       )}
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }
