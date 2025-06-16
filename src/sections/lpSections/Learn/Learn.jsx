@@ -8,7 +8,7 @@ export function Learn() {
       <h1
         className="protest-font"
         style={{
-          height: "200px",
+          height: "fit-content",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -16,6 +16,8 @@ export function Learn() {
           fontSize: "clamp(5rem, 6vw, 7rem",
           zIndex: "2",
           textAlign: "center",
+          marginTop: "100px",
+          marginBottom: "100px",
         }}
       >
         What Will You Learn?
