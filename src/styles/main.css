@@ -2,6 +2,7 @@
   --red: #f50000;
   --orange: #ef9104;
   --lite-orange: #feac31;
+  --dark-red: #d42d18;
 }
 
 * {
@@ -150,6 +151,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.text-underline {
+  text-decoration: underline;
 }
 
 .column {

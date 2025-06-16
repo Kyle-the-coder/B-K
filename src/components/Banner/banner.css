@@ -53,10 +53,6 @@
     width: 80px;
     height: 80px;
   }
-
-  .banner-mc {
-    height: 200px;
-  }
 }
 
 @media only screen and (max-width: 400px) {
