@@ -7,7 +7,7 @@ export function MainLayout() {
   const { state } = useNavigation();
 
   return (
-    <div className="main-container">
+    <div className="main-container silver-bg">
       <Nav />
       {state === "loading" ? (
         {
