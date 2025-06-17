@@ -10,7 +10,7 @@ export function Hero() {
       <WordButton text="See Classes" />
       <div className="vignette"></div>
       <div className="hero-bg">
-        <video src={vid} autoPlay muted loop />
+        <video src={vid} autoPlay muted loop className="charcoal-bg" />
       </div>
     </section>
   );
