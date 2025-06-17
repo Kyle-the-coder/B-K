@@ -54,7 +54,7 @@ export function Levels() {
     };
   }, []);
   return (
-    <section className="levels-main">
+    <section className="levels-main silver-bg">
       <div className="levels-title-container">
         <h1 className="protest-font" style={{ textAlign: "center" }}>
           Dance is for Everyone

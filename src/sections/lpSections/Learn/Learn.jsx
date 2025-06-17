@@ -58,6 +58,7 @@ export function Learn() {
         infoRefs.current[index],
         {
           height: "50%",
+          width: "100%",
           transform: "translateY(0%)",
           bottom: 0,
           duration: 0.3,
@@ -104,7 +105,7 @@ export function Learn() {
   };
 
   return (
-    <section className="learn-main">
+    <section className="learn-main silver-bg">
       <img src={line} className="learn-line" />
       <h1
         className="protest-font"

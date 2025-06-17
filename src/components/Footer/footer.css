@@ -78,11 +78,18 @@
 @media only screen and (max-width: 800px) {
   .footer-main {
     flex-direction: column;
-    padding: 100px;
+    padding: 100px 20px;
   }
 
+  .footer-blerb {
+    width: 100%;
+  }
+
+  .footer-blerb > p {
+    text-align: center;
+  }
   .footer-logo {
-    width: 80%;
+    width: 100%;
   }
 
   .social-info > p {
