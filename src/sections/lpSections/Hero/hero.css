@@ -57,6 +57,9 @@
 
 @media only screen and (max-width: 900px) {
   .hero-main {
-    height: 100vh;
+    height: calc(100vh - 130px);
+  }
+  .hero-main > h1 {
+    font-size: 3rem;
   }
 }

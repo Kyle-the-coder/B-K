@@ -36,6 +36,16 @@ body {
   justify-content: center;
 }
 
+.main-up-arrow {
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  z-index: 7;
+  cursor: pointer;
+}
+
 @font-face {
   font-family: "Archivo";
   src: url("./ArchivoBlack-Regular.ttf") format("truetype");
