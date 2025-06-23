@@ -1,7 +1,13 @@
 import { useState } from "react";
 import "./wordbutton.css";
 
-export function WordButton({ text, fontSize, margin, onClick }) {
+export function WordButton({
+  text,
+  fontSize,
+  margin,
+  onClick,
+  opacity = true,
+}) {
   const [isHover, setIsHover] = useState(false);
   return (
     <button
@@ -11,6 +17,7 @@ export function WordButton({ text, fontSize, margin, onClick }) {
       style={{
         fontSize: fontSize ? fontSize : "clamp(1.8rem, 1.9vw, 2rem)",
         margin: margin,
+        opacity: opacity ? "1" : "0",
       }}
       onClick={onClick}
     >

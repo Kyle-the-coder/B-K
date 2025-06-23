@@ -2,7 +2,7 @@ import { Title } from "../../components/Title/Title";
 import { Bio } from "../../sections/aboutSections/Bio/Bio";
 import bianca from "../../assets/design/bianca.png";
 import kyle from "../../assets/design/kyle.png";
-function About() {
+export default function About() {
   return (
     <section className="display-column">
       <Title title="About" />
@@ -20,7 +20,3 @@ function About() {
     </section>
   );
 }
-
-export const aboutRoute = {
-  element: <About />,
-};

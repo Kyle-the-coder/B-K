@@ -4,11 +4,17 @@ import insta from "../../assets/icons/instagramBlack.png";
 import email from "../../assets/icons/email.png";
 import user from "../../assets/icons/user.png";
 import "./footer.css";
+import { useNavigate } from "react-router-dom";
 
 export function Footer() {
+  const navigate = useNavigate();
   return (
     <section id="footer" className="footer-main charcoal-bg">
-      <img src={user} className="footer-login" />
+      <img
+        src={user}
+        className="footer-login"
+        onClick={() => navigate("/login")}
+      />
       <div className="footer-blerb">
         <h1 className="archivo-font">Bianca and Kyle</h1>
         <p className="archivo-font">

@@ -4,7 +4,7 @@ import { Learn } from "../../sections/lpSections/Learn/Learn";
 import { Levels } from "../../sections/lpSections/Levels/Levels";
 import { Newsletter } from "../../sections/lpSections/Newsletter/NewsLetter";
 
-function LandingPage() {
+export default function LandingPage() {
   return (
     <div className="display-column">
       <Hero />
@@ -15,7 +15,3 @@ function LandingPage() {
     </div>
   );
 }
-
-export const landingRoute = {
-  element: <LandingPage />,
-};
