@@ -5,6 +5,7 @@ import { landingRoute } from "./pages/Landing/Landing";
 import { aboutRoute } from "./pages/About/About";
 import { classesRoute } from "./pages/Classes/Classes";
 import { singleClassRoute } from "./pages/SingleClass/SingleClass";
+import { loginRoute } from "./pages/Login/Login";
 // import { aboutRoute } from "./pages/About/About";
 export const router = createBrowserRouter([
   {
@@ -15,7 +16,8 @@ export const router = createBrowserRouter([
       { path: "/", ...landingRoute },
       { path: "/about", ...aboutRoute },
       { path: "/classes", ...classesRoute },
-      { path: "classes/singleClass/:id", ...singleClassRoute },
+      { path: "/classes/singleClass/:id", ...singleClassRoute },
+      { path: "/login", ...loginRoute },
     ],
   },
 ]);
