@@ -2,13 +2,13 @@ import logo from "../../assets/logo/b-k.svg";
 import fb from "../../assets/icons/facebookBlack.png";
 import insta from "../../assets/icons/instagramBlack.png";
 import email from "../../assets/icons/email.png";
-import upArrow from "../../assets/icons/ogUpArrow.png";
+import user from "../../assets/icons/user.png";
 import "./footer.css";
-import { scrollToSection } from "../SmoothScroll";
 
 export function Footer() {
   return (
     <section id="footer" className="footer-main charcoal-bg">
+      <img src={user} className="footer-login" />
       <div className="footer-blerb">
         <h1 className="archivo-font">Bianca and Kyle</h1>
         <p className="archivo-font">
