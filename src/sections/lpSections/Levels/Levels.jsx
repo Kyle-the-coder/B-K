@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import minus from "../../../assets/icons/remove.png";
 import plus from "../../../assets/icons/plus.png";
-import levelsBg from "../../../assets/design/levelsBg.png";
+import levelsBg from "../../../assets/design/levelsBg.jpg";
 import line from "../../../assets/design/line2.svg";
 import { WordButton } from "../../../components/Buttons/WordButton/WordButton";
 import "./levels.css";
@@ -63,6 +63,7 @@ export function Levels() {
       </div>
 
       <div className="faq-cards-container">
+        <div className="levels-vignette"> </div>
         <img src={levelsBg} className="levels-bg" />
         {levelsInfo.map((info, index) => (
           <div

@@ -15,6 +15,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  z-index: 1;
 }
 
 .levels-line {
@@ -40,12 +41,27 @@
   position: relative;
   gap: 100px;
 }
-.levels-bg {
+
+.levels-vignette {
   width: 100%;
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0) 55%,
+    rgba(0, 0, 0, 0.827) 90%
+  );
+  z-index: 1;
+}
+.levels-bg {
+  width: 100%;
+  height: 1500px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
   object-fit: cover;
 }
 
