@@ -24,6 +24,7 @@ export default function CreateClass() {
   const [categoryTitle, setCategoryTitle] = useState(null);
   const [seriesTitle, setSeriesTitle] = useState(null);
   const [teachers, setTeachers] = useState(null);
+  const [formErrors, setFormErrors] = useState({});
   const navigate = useNavigate();
 
   const formIconArray = [
@@ -46,7 +47,6 @@ export default function CreateClass() {
 
   const handleChange = (index, content, key = null) => {
     const updated = [...formArray];
-
     if (key && typeof updated[index].value === "object") {
       updated[index].value = {
         ...updated[index].value,
@@ -69,13 +69,13 @@ export default function CreateClass() {
       case "Description":
         return (
           <div
-            style={{ marginBottom: "100px" }}
             key={index}
             className="display-column"
+            style={{ marginBottom: "100px" }}
           >
             <label
-              style={{ fontSize: "1.5rem" }}
               className="input-label outfit-font"
+              style={{ fontSize: "1.5rem" }}
             >
               {field.type}
             </label>
@@ -85,16 +85,16 @@ export default function CreateClass() {
       case "Redirect":
         return (
           <div
-            style={{ marginBottom: "100px", padding: "30px 3%" }}
             key={index}
             className="display-column"
+            style={{ marginBottom: "100px", padding: "30px 3%" }}
           >
             <label className="input-label outfit-font">Redirect Name</label>
             <input
               className="input"
               type="text"
               value={field.value.name}
-              placeholder="e.g. See lastest Youtube Video"
+              placeholder="e.g. See latest Youtube Video"
               style={{ marginBottom: "30px", padding: "10px 20px" }}
               onChange={(e) => handleChange(index, e.target.value, "partName")}
             />
@@ -109,13 +109,12 @@ export default function CreateClass() {
             />
           </div>
         );
-
       case "Image":
         return (
           <div
-            style={{ marginBottom: "100px" }}
             key={index}
             className="display-column"
+            style={{ marginBottom: "100px" }}
           >
             <label className="input-label outfit-font">Upload Image</label>
             <input
@@ -144,15 +143,28 @@ export default function CreateClass() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const photoInput = document.querySelector('input[type="file"]');
+    const flyerFile = photoInput?.files[0];
+
+    const errors = {};
+    if (!classTitle) errors.classTitle = true;
+    if (!categoryTitle) errors.categoryTitle = true;
+    if (!teachers) errors.teachers = true;
+    if (categories.length === 0) errors.categories = true;
+    if (!flyerFile) errors.flyer = true;
+
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      alert("Please fill out all required fields.");
+      return;
+    }
+
+    setFormErrors({});
     setIsLoading(true);
 
-    let imgUrl = null;
-
     try {
-      const photoInput = document.querySelector('input[type="file"]');
-      if (photoInput?.files[0]) {
-        imgUrl = await uploadImageToFirebase(photoInput.files[0]);
-      }
+      let imgUrl = await uploadImageToFirebase(flyerFile);
 
       const processedContent = await Promise.all(
         formArray.map(async (field) => {
@@ -195,18 +207,32 @@ export default function CreateClass() {
           <div className="input-container">
             <label className="input-label outfit-font">Class Title:</label>
             <input
-              className="input playfair-font"
+              className={`input playfair-font ${
+                formErrors.classTitle ? "error-border" : ""
+              }`}
               type="text"
-              onChange={(e) => setClassTitle(e.target.value)}
+              onChange={(e) => {
+                setClassTitle(e.target.value);
+                if (formErrors.classTitle && e.target.value.trim() !== "") {
+                  setFormErrors((prev) => ({ ...prev, classTitle: false }));
+                }
+              }}
             />
           </div>
           <div className="input-container">
             <label className="input-label outfit-font">Category Title:</label>
             <input
-              className="input playfair-font"
+              className={`input playfair-font ${
+                formErrors.categoryTitle ? "error-border" : ""
+              }`}
               placeholder="e.g. Freestyle/Choreography"
               type="text"
-              onChange={(e) => setCategoryTitle(e.target.value)}
+              onChange={(e) => {
+                setCategoryTitle(e.target.value);
+                if (formErrors.categoryTitle && e.target.value.trim() !== "") {
+                  setFormErrors((prev) => ({ ...prev, categoryTitle: false }));
+                }
+              }}
             />
           </div>
           <div className="input-container">
@@ -224,26 +250,38 @@ export default function CreateClass() {
           <div className="input-container">
             <label className="input-label outfit-font">Teacher(s):</label>
             <input
-              className="input playfair-font"
+              className={`input playfair-font ${
+                formErrors.teachers ? "error-border" : ""
+              }`}
               type="text"
-              onChange={(e) => setTeachers(e.target.value)}
+              onChange={(e) => {
+                setTeachers(e.target.value);
+                if (formErrors.teachers && e.target.value.trim() !== "") {
+                  setFormErrors((prev) => ({ ...prev, teachers: false }));
+                }
+              }}
             />
           </div>
 
           <div className="input-container">
             <label className="input-label outfit-font">Categories:</label>
             <input
-              className="input playfair-font"
+              className={`input playfair-font ${
+                formErrors.categories ? "error-border" : ""
+              }`}
               type="text"
               placeholder="e.g. Choreography, Freestyle, Specific Style"
-              onChange={(e) =>
-                setCategories(
-                  e.target.value
-                    .split(",")
-                    .map((cat) => cat.trim())
-                    .filter((cat) => cat !== "")
-                )
-              }
+              onChange={(e) => {
+                const value = e.target.value;
+                const cats = value
+                  .split(",")
+                  .map((cat) => cat.trim())
+                  .filter((cat) => cat !== "");
+                setCategories(cats);
+                if (formErrors.categories && cats.length > 0) {
+                  setFormErrors((prev) => ({ ...prev, categories: false }));
+                }
+              }}
             />
             {categories.length > 0 && (
               <div className="category-container outfit-font">
@@ -256,16 +294,20 @@ export default function CreateClass() {
               </div>
             )}
           </div>
+
           <div className="input-container">
             <label className="input-label outfit-font">Flyer:</label>
             <input
-              className="input-file"
+              className={`input-file ${formErrors.flyer ? "error-border" : ""}`}
               type="file"
               accept="image/*"
               onChange={(e) => {
                 const file = e.target.files[0];
                 if (file) {
                   setMainImagePreview(URL.createObjectURL(file));
+                  if (formErrors.flyer) {
+                    setFormErrors((prev) => ({ ...prev, flyer: false }));
+                  }
                 }
               }}
             />
@@ -296,7 +338,7 @@ export default function CreateClass() {
                 </div>
               ) : (
                 <img
-                  className=" submit-icon charcoal-bg"
+                  className="submit-icon charcoal-bg"
                   src={submit}
                   onClick={handleSubmit}
                 />

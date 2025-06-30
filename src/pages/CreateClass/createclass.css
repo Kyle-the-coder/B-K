@@ -104,6 +104,9 @@
   cursor: pointer;
   transition: transform 0.3s ease;
 }
+.error-border {
+  border: 2px solid red !important;
+}
 
 .form-icon:hover {
   transform: scale(1.1);
