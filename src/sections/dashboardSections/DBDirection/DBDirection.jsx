@@ -28,7 +28,7 @@ export function DBDirection() {
         className="db-direction-container "
         onClick={(e) => {
           e.preventDefault();
-          navigate("/createBlog");
+          navigate("/createClass");
           window.scrollTo(0, 0);
         }}
       >
@@ -39,7 +39,7 @@ export function DBDirection() {
         className="db-direction-container "
         onClick={(e) => {
           e.preventDefault();
-          navigate("/editDirectory");
+          navigate("/editClass");
           window.scrollTo(0, 0);
         }}
       >
