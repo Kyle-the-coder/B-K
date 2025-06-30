@@ -1,5 +1,4 @@
 import {
-  getFirestore,
   collection,
   doc,
   addDoc,
@@ -13,38 +12,37 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
-import { initializeApp } from "firebase/app";
 import { db } from "../firebaseConfig";
 
 const auth = getAuth();
 
-const blogsCollection = collection(db, "blogs");
+const classesCollection = collection(db, "class");
 
-// ✅ Get all blogs
-export const getBlogs = async () => {
-  const snapshot = await getDocs(blogsCollection);
+// ✅ Get all Classes
+export const getClasses = async () => {
+  const snapshot = await getDocs(classesCollection);
   return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 };
 
-// ✅ Get blog by ID
-export const getBlogById = async (id) => {
-  const blogRef = doc(db, "blogs", id);
-  const docSnap = await getDoc(blogRef);
+// ✅ Get class by ID
+export const getClassById = async (id) => {
+  const classRef = doc(db, "class", id);
+  const docSnap = await getDoc(classRef);
 
   if (!docSnap.exists()) {
-    throw new Error("Blog not found");
+    throw new Error("Class not found");
   }
 
   return { id: docSnap.id, ...docSnap.data() };
 };
 
-// ✅ Create a new blog (requires auth)
-export const postBlogToFirestore = async (blogData) => {
+// ✅ Create a new class (requires auth)
+export const postClassToFirestore = async (classData) => {
   const user = auth.currentUser;
   if (!user) throw new Error("User not authenticated");
 
-  const docRef = await addDoc(collection(db, "blogs"), {
-    ...blogData,
+  const docRef = await addDoc(collection(db, "class"), {
+    ...classData,
     likes: [],
     comments: [],
     datePosted: serverTimestamp(),
@@ -53,33 +51,33 @@ export const postBlogToFirestore = async (blogData) => {
   return docRef.id;
 };
 
-// ✅ Update blog
-export const updateBlog = async (id, blogData) => {
+// ✅ Update class
+export const updateClass = async (id, classData) => {
   const user = auth.currentUser;
   if (!user) throw new Error("Not authenticated");
 
-  const blogRef = doc(db, "blogs", id);
-  await updateDoc(blogRef, blogData);
-  return { id, ...blogData };
+  const classRef = doc(db, "class", id);
+  await updateDoc(classRef, classData);
+  return { id, ...classData };
 };
 
-// ✅ Delete blog
-export const deleteBlog = async (id) => {
+// ✅ Delete class
+export const deleteClass = async (id) => {
   const user = auth.currentUser;
   if (!user) throw new Error("Not authenticated");
 
-  const blogRef = doc(db, "blogs", id);
-  await deleteDoc(blogRef);
+  const classRef = doc(db, "class", id);
+  await deleteDoc(classRef);
   return { success: true };
 };
 
 // Add current user's UID to the likes array
-export const likeBlog = async (blogId) => {
+export const likeClass = async (classId) => {
   const user = auth.currentUser;
   if (!user) throw new Error("Not authenticated");
 
-  const blogRef = doc(db, "blogs", blogId);
-  await updateDoc(blogRef, {
+  const classRef = doc(db, "class", classId);
+  await updateDoc(classRef, {
     likes: arrayUnion(user.uid),
   });
 
@@ -87,12 +85,12 @@ export const likeBlog = async (blogId) => {
 };
 
 // Remove current user's UID to the likes array
-export const removeLikeBlog = async (blogId) => {
+export const removeLikeClass = async (classId) => {
   const user = auth.currentUser;
   if (!user) throw new Error("Not authenticated");
 
-  const blogRef = doc(db, "blogs", blogId);
-  await updateDoc(blogRef, {
+  const classRef = doc(db, "class", classId);
+  await updateDoc(classRef, {
     likes: arrayRemove(user.uid),
   });
 
@@ -100,8 +98,8 @@ export const removeLikeBlog = async (blogId) => {
 };
 
 // Add a comment with name and message
-export const addCommentToBlog = async (blogId, commentText, username) => {
-  const blogRef = doc(db, "blogs", blogId);
+export const addCommentToClass = async (classId, commentText, username) => {
+  const classRef = doc(db, "class", classId);
 
   const comment = {
     name: username,
@@ -109,7 +107,7 @@ export const addCommentToBlog = async (blogId, commentText, username) => {
     date: Timestamp.now(),
   };
 
-  await updateDoc(blogRef, {
+  await updateDoc(classRef, {
     comments: arrayUnion(comment),
   });
 

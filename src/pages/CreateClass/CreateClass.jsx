@@ -4,7 +4,7 @@ import { useState } from "react";
 import { serverTimestamp } from "firebase/firestore";
 import { PostLoader } from "../../components/Loader/PostLoader/PostLoader";
 import TiptapEditor from "../../components/TipTap/TiptapEditor";
-import { postBlogToFirestore } from "../../utils/blogApi";
+import { postClassToFirestore } from "../../utils/classApi";
 import menu from "../../assets/icons/createIcons/menu.png";
 import submit from "../../assets/icons/createIcons/check.png";
 import description from "../../assets/icons/createIcons/pencil.png";
@@ -19,19 +19,16 @@ export default function CreateClass() {
   const [isLoading, setIsLoading] = useState(false);
   const [expandIcons, setExpandIcons] = useState(false);
   const [formArray, setFormArray] = useState([]);
-  const [title, setTitle] = useState(null);
-  const [author, setAuthor] = useState(null);
-  const [readTime, setReadTime] = useState(null);
   const [categories, setCategories] = useState([]);
-  const [subTitle, setSubTitle] = useState(null);
-  const [series, setSeries] = useState(null);
-  const [part, setPart] = useState(null);
+  const [classTitle, setClassTitle] = useState(null);
+  const [categoryTitle, setCategoryTitle] = useState(null);
+  const [seriesTitle, setSeriesTitle] = useState(null);
+  const [teachers, setTeachers] = useState(null);
   const navigate = useNavigate();
 
   const formIconArray = [
     { img: description, type: "Description", label: "Description" },
     { img: redirect, type: "Redirect", label: "Redirect Link" },
-    { img: article, type: "Article", label: "Article Content" },
     { img: image, type: "Image", label: "Image Upload" },
   ];
 
@@ -70,7 +67,6 @@ export default function CreateClass() {
   const renderFormField = (field, index) => {
     switch (field.type) {
       case "Description":
-      case "Article":
         return (
           <div
             style={{ marginBottom: "100px" }}
@@ -98,7 +94,7 @@ export default function CreateClass() {
               className="input"
               type="text"
               value={field.value.name}
-              placeholder="Part 3, or Part 1"
+              placeholder="e.g. See lastest Youtube Video"
               style={{ marginBottom: "30px", padding: "10px 20px" }}
               onChange={(e) => handleChange(index, e.target.value, "partName")}
             />
@@ -106,6 +102,7 @@ export default function CreateClass() {
             <input
               className="input"
               type="url"
+              placeholder="e.g. http://youtube.com/videoLink"
               style={{ padding: "10px 20px" }}
               value={field.value.url}
               onChange={(e) => handleChange(index, e.target.value, "partUrl")}
@@ -167,94 +164,78 @@ export default function CreateClass() {
         })
       );
 
-      const blogPayload = {
-        title,
-        subTitle,
-        series,
-        author,
-        readTime,
-        part,
+      const classPayload = {
+        classTitle,
+        categoryTitle,
+        seriesTitle,
+        teachers,
         categories,
         imgUrl,
         content: processedContent,
         datePosted: serverTimestamp(),
       };
 
-      const blogId = await postBlogToFirestore(blogPayload);
-      alert(`Blog created successfully! ID: ${blogId}`);
+      const classId = await postClassToFirestore(classPayload);
+      alert(`Class created successfully! ID: ${classId}`);
       navigate("/");
       window.scrollTo(0, 0);
     } catch (error) {
-      console.error("Error submitting blog:", error);
-      alert("Failed to submit blog");
+      console.error("Error submitting class:", error);
+      alert("Failed to submit class");
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <section className="create-blog-main">
-      <h1 className="outfit-font">Create a Blog</h1>
+    <section className="create-class-main">
+      <h1 className="outfit-font">Create a Class</h1>
       <div className="display-column">
         <form className="form">
           <div className="input-container">
-            <label className="input-label outfit-font">Title:</label>
+            <label className="input-label outfit-font">Class Title:</label>
             <input
               className="input playfair-font"
               type="text"
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={(e) => setClassTitle(e.target.value)}
+            />
+          </div>
+          <div className="input-container">
+            <label className="input-label outfit-font">Category Title:</label>
+            <input
+              className="input playfair-font"
+              placeholder="e.g. Freestyle/Choreography"
+              type="text"
+              onChange={(e) => setCategoryTitle(e.target.value)}
             />
           </div>
           <div className="input-container">
             <label className="input-label outfit-font">
-              Category Title (optional):
+              Series Title (optional):
             </label>
             <input
               className="input playfair-font"
               type="text"
-              onChange={(e) => setSubTitle(e.target.value)}
+              placeholder="e.g. Popping Series"
+              onChange={(e) => setSeriesTitle(e.target.value)}
             />
           </div>
+
           <div className="input-container">
-            <label className="input-label outfit-font">Series Title:</label>
+            <label className="input-label outfit-font">Teacher(s):</label>
             <input
               className="input playfair-font"
               type="text"
-              onChange={(e) => setSeries(e.target.value)}
+              onChange={(e) => setTeachers(e.target.value)}
             />
           </div>
-          <div className="input-container">
-            <label className="input-label outfit-font">
-              Part Number (optional):
-            </label>
-            <input
-              className="input-part"
-              type="number"
-              onChange={(e) => setPart(e.target.value)}
-            />
-          </div>
-          <div className="input-container">
-            <label className="input-label outfit-font">Author:</label>
-            <input
-              className="input playfair-font"
-              type="text"
-              onChange={(e) => setAuthor(e.target.value)}
-            />
-          </div>
-          <div className="input-container">
-            <label className="input-label outfit-font">Read Time:</label>
-            <input
-              className="input playfair-font"
-              type="text"
-              onChange={(e) => setReadTime(e.target.value)}
-            />
-          </div>
+
           <div className="input-container">
             <label className="input-label outfit-font">Categories:</label>
             <input
               className="input playfair-font"
               type="text"
-              placeholder="e.g. Monday Devotion, Tuesday Article"
+              placeholder="e.g. Choreography, Freestyle, Specific Style"
               onChange={(e) =>
                 setCategories(
                   e.target.value
@@ -276,7 +257,7 @@ export default function CreateClass() {
             )}
           </div>
           <div className="input-container">
-            <label className="input-label outfit-font">Photo:</label>
+            <label className="input-label outfit-font">Flyer:</label>
             <input
               className="input-file"
               type="file"
@@ -310,7 +291,7 @@ export default function CreateClass() {
                 onClick={() => setExpandIcons(!expandIcons)}
               />
               {isLoading ? (
-                <div className="post-loader-container">
+                <div className="class-post-loader-container">
                   <PostLoader />
                 </div>
               ) : (

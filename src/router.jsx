@@ -4,7 +4,7 @@ import { ErrorLayout } from "./layouts/ErrorLayout";
 import { landingRoute } from "./pages/Landing/landingRoute.jsx";
 import { aboutRoute } from "./pages/About/aboutRoute.jsx";
 import { classesRoute } from "./pages/Classes/classesRoute.jsx";
-import { singleClassRoute } from "./pages/SingleClass/SingleClass";
+import { singleClassRoute } from "./pages/SingleClass/singleClassRoute.jsx";
 import { loginRoute } from "./pages/Login/loginRoute.jsx";
 import { PrivateRoute } from "./components/PrivateRoute.jsx";
 import { dashboardRoute } from "./pages/Dashboard/dashboardRoute.jsx";
