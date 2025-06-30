@@ -13,9 +13,8 @@
   width: clamp(300px, 50vw, 400px);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   height: 100%;
 }
 

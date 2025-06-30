@@ -7,7 +7,7 @@ import { classesRoute } from "./pages/Classes/classesRoute.jsx";
 import { singleClassRoute } from "./pages/SingleClass/SingleClass";
 import { loginRoute } from "./pages/Login/loginRoute.jsx";
 import { PrivateRoute } from "./components/PrivateRoute.jsx";
-import { Dashboard } from "./pages/Dashboard/Dashboard.jsx";
+import { dashboardRoute } from "./pages/Dashboard/dashboardRoute.jsx";
 // import { aboutRoute } from "./pages/About/About";
 export const router = createBrowserRouter([
   {
@@ -22,11 +22,7 @@ export const router = createBrowserRouter([
       { path: "/login", ...loginRoute },
       {
         path: "/dashboard",
-        element: (
-          <PrivateRoute>
-            <Dashboard />
-          </PrivateRoute>
-        ),
+        element: <PrivateRoute>{dashboardRoute.element}</PrivateRoute>,
       },
     ],
   },

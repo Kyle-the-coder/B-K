@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import heroBg from "../../../assets/design/graffiti.png";
+import heroBg from "../../../assets/design/dbBg.jpg";
 import heroBgPhone from "../../../assets/design/graffiti.png";
 
 import "./dbhero.css";

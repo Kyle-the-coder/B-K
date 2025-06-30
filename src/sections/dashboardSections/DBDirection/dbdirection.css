@@ -25,7 +25,7 @@
 
 .db-direction-container:hover {
   scale: 1.01;
-  background-color: var(--green);
+  background-color: var(--lite-orange);
   filter: drop-shadow(0px 0px 5px white);
 }
 

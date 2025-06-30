@@ -25,29 +25,29 @@ export function DBDirection() {
       className="display-column charcoal-bg neg-marg"
     >
       <div
-        className="db-direction-container green-bg"
+        className="db-direction-container "
         onClick={(e) => {
           e.preventDefault();
           navigate("/createBlog");
           window.scrollTo(0, 0);
         }}
       >
-        <h1 className="outfit-font">Create a Blog Post</h1>
+        <h1 className="outfit-font">Create a Class Post</h1>
         <img src={add} />
       </div>
       <div
-        className="db-direction-container green-bg"
+        className="db-direction-container "
         onClick={(e) => {
           e.preventDefault();
           navigate("/editDirectory");
           window.scrollTo(0, 0);
         }}
       >
-        <h1 className="outfit-font">Edit a Blog Post</h1>
+        <h1 className="outfit-font">Edit a Class Post</h1>
         <img src={edit} />
       </div>
       <div
-        className="db-direction-container green-bg"
+        className="db-direction-container "
         onClick={(e) => {
           e.preventDefault();
           navigate("/editCat");
