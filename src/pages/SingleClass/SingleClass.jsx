@@ -38,7 +38,7 @@ export default function SingleClass({}) {
           <ScTitle
             classTitle={subject.classTitle}
             cateogryTitle={subject.cateogryTitle}
-            teacher={subject.teachers}
+            teachers={subject.teachers}
             datePosted={subject.datePosted}
             titleImg={subject.imgUrl}
             partName={
@@ -53,6 +53,7 @@ export default function SingleClass({}) {
               subject.content.find((item) => item.type === "Description")?.value
             }
             redirectLink={subject.redirectLink}
+            classDate={subject.classDate}
           />
         </>
       ) : (

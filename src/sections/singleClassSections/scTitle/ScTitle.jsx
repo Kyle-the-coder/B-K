@@ -11,6 +11,7 @@ export function ScTitle({
   partUrl,
   partName,
   description,
+  classDate,
 }) {
   const formattedDate = datePosted?.toDate
     ? datePosted.toDate().toLocaleDateString(undefined, {
@@ -53,8 +54,8 @@ export function ScTitle({
         </div>
 
         <div className="sc-title-info">
-          <h6 className="outfit-xthin-font">Date Posted:</h6>
-          <h5 className="playfair-font">{formattedDate}</h5>
+          <h6 className="outfit-xthin-font">Class Date:</h6>
+          <h5 className="playfair-font">{classDate}</h5>
         </div>
       </div>
     </section>

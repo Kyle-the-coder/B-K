@@ -1,109 +1,93 @@
-import { useState } from "react";
-import flyer from "../../../assets/placeholders/EDPFlyer.png";
-import "./classesgrid.css";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../../firebaseConfig";
+import DOMPurify from "dompurify";
+import "./classesgrid.css";
+import { Loader } from "../../../components/Loader/Loader";
 
-export function ClassesGrid({ img, title, date, blerb }) {
+export function ClassesGrid() {
   const [flyerIndex, setFlyerIndex] = useState(null);
+  const [classes, setClasses] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    async function fetchClasses() {
+      try {
+        const querySnapshot = await getDocs(collection(db, "class"));
+        const classData = querySnapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+          imgUrl: doc.data().imgUrl,
+        }));
+        setClasses(classData);
+      } catch (error) {
+        console.error("Error fetching classes:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchClasses();
+  }, []);
+
   function handleHover(index) {
     setFlyerIndex(index);
   }
-  const flyerArray = [
-    {
-      img: flyer,
-      id: "oUjT8mgmEPpHrLTHSVTQ",
-      title: "Hip Hop Choreography",
-      date: "May 19th, 2025",
-      blerb:
-        " This is a Choreography class in which students will learn a small routine",
-    },
-    {
-      img: flyer,
-      id: 2,
-      title: "Hip Hop Choreography1",
-      date: "May 19th, 2025",
-      blerb:
-        " This is a Choreography class in which students will learn a small routine",
-    },
-    {
-      img: flyer,
-      id: 3,
-      title: "Hip Hop Choreography2",
-      date: "May 19th, 2025",
-      blerb:
-        " This is a Choreography class in which students will learn a small routine",
-    },
-    {
-      img: flyer,
-      id: 4,
-      title: "Hip Hop Choreography3",
-      date: "May 19th, 2025",
-      blerb:
-        " This is a Choreography class in which students will learn a small routine",
-    },
-    {
-      img: flyer,
-      id: 5,
-      title: "Hip Hop Choreography4",
-      date: "May 19th, 2025",
-      blerb:
-        " This is a Choreography class in which students will learn a small routine",
-    },
-    {
-      img: flyer,
-      id: 6,
-      title: "Hip Hop Choreography5",
-      date: "May 19th, 2025",
-      blerb:
-        " This is a Choreography class in which students will learn a small routine",
-    },
-    {
-      img: flyer,
-      id: 7,
-      title: "Hip Hop Choreography6",
-      date: "May 19th, 2025",
-      blerb:
-        " This is a Choreography class in which students will learn a small routine",
-    },
-  ];
 
-  console.log(flyerIndex);
+  if (loading) {
+    return (
+      <section className="cg-main-loading">
+        <Loader />
+      </section>
+    );
+  }
+
   return (
     <section className="cg-main">
-      {flyerArray.map((info, index) => (
-        <div
-          key={info.title}
-          className="cg-container"
-          style={{
-            boxShadow:
-              index === flyerIndex
-                ? "0 0 25px var(--red)"
-                : "0 2px 8px #0000001a",
-          }}
-          onMouseEnter={() => {
-            handleHover(index);
-          }}
-          onClick={() => navigate(`singleClass/${info.id}`)}
-        >
-          <img src={info.img} className="cg-img" />
-          <p
-            className="archivo-font silver-text"
-            style={{ fontSize: "1.8rem" }}
+      {classes.map((info, index) => {
+        const rawDescription =
+          info.content.find((item) => item.type === "Description")?.value || "";
+        const textOnly = DOMPurify.sanitize(rawDescription, {
+          ALLOWED_TAGS: [],
+        });
+        const shortText =
+          textOnly.slice(0, 100) + (textOnly.length > 100 ? "..." : "");
+
+        return (
+          <div
+            key={info.id}
+            className="cg-container"
+            style={{
+              boxShadow:
+                index === flyerIndex
+                  ? "0 0 25px var(--red)"
+                  : "0 2px 8px #0000001a",
+            }}
+            onMouseEnter={() => handleHover(index)}
+            onClick={() => navigate(`singleClass/${info.id}`)}
           >
-            {info.date}
-          </p>
-          <h1 className="protest-font" style={{ fontSize: "2rem" }}>
-            {info.title}
-          </h1>
-          <p
-            style={{ fontSize: "1.3rem" }}
-            className="archivo-font d-silver-text"
-          >
-            {info.blerb}
-          </p>
-        </div>
-      ))}
+            <img src={info.imgUrl} className="cg-img" alt={info.title} />
+            <p
+              className="archivo-font silver-text"
+              style={{ fontSize: "1.8rem" }}
+            >
+              {info.classDate}
+            </p>
+            <h1 className="protest-font" style={{ fontSize: "2rem" }}>
+              {info.classTitle}
+            </h1>
+            <p
+              style={{ fontSize: "1.3rem" }}
+              className="archivo-font d-silver-text"
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(shortText),
+              }}
+            />
+          </div>
+        );
+      })}
     </section>
   );
 }
