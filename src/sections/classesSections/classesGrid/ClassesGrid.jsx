@@ -12,7 +12,7 @@ export function ClassesGrid({ img, title, date, blerb }) {
   const flyerArray = [
     {
       img: flyer,
-      id: 1,
+      id: "oUjT8mgmEPpHrLTHSVTQ",
       title: "Hip Hop Choreography",
       date: "May 19th, 2025",
       blerb:

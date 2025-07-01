@@ -20,6 +20,7 @@ export default function CreateClass() {
   const [expandIcons, setExpandIcons] = useState(false);
   const [formArray, setFormArray] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [classDate, setClassDate] = useState(null);
   const [classTitle, setClassTitle] = useState(null);
   const [categoryTitle, setCategoryTitle] = useState(null);
   const [seriesTitle, setSeriesTitle] = useState(null);
@@ -153,6 +154,7 @@ export default function CreateClass() {
     if (!teachers) errors.teachers = true;
     if (categories.length === 0) errors.categories = true;
     if (!flyerFile) errors.flyer = true;
+    if (!classDate) errors.classDate = true;
 
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
@@ -180,6 +182,7 @@ export default function CreateClass() {
         classTitle,
         categoryTitle,
         seriesTitle,
+        classDate,
         teachers,
         categories,
         imgUrl,
@@ -235,6 +238,7 @@ export default function CreateClass() {
               }}
             />
           </div>
+
           <div className="input-container">
             <label className="input-label outfit-font">
               Series Title (optional):
@@ -244,6 +248,23 @@ export default function CreateClass() {
               type="text"
               placeholder="e.g. Popping Series"
               onChange={(e) => setSeriesTitle(e.target.value)}
+            />
+          </div>
+
+          <div className="input-container">
+            <label className="input-label outfit-font">Class Date:</label>
+            <input
+              className={`input playfair-font ${
+                formErrors.categoryTitle ? "error-border" : ""
+              }`}
+              placeholder="e.g. March etc"
+              type="text"
+              onChange={(e) => {
+                setClassDate(e.target.value);
+                if (formErrors.classDate && e.target.value.trim() !== "") {
+                  setFormErrors((prev) => ({ ...prev, categoryTitle: false }));
+                }
+              }}
             />
           </div>
 
@@ -262,7 +283,6 @@ export default function CreateClass() {
               }}
             />
           </div>
-
           <div className="input-container">
             <label className="input-label outfit-font">Categories:</label>
             <input
@@ -294,7 +314,6 @@ export default function CreateClass() {
               </div>
             )}
           </div>
-
           <div className="input-container">
             <label className="input-label outfit-font">Flyer:</label>
             <input
@@ -323,7 +342,6 @@ export default function CreateClass() {
               />
             )}
           </div>
-
           <div className="form-array-container">
             {formArray.map((field, index) => renderFormField(field, index))}
             <div className="add-to-array">
