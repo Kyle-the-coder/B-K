@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import "./hero.css";
 import vid from "../../../assets/videos/heroVid.mp4";
 import { WordButton } from "../../../components/Buttons/WordButton/WordButton";
-import { PostLoader } from "../../../components/Loader/PostLoader/PostLoader";
+import { Loader } from "../../../components/Loader/Loader";
 
 export function Hero() {
   const [videoReady, setVideoReady] = useState(false);
@@ -26,7 +26,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="hero-main">
+    <section className="hero-main charcoal-bg">
       <h1
         className="archivo-thin-font"
         style={{ opacity: videoReady ? "1" : "0", transition: "all .1s" }}
@@ -46,7 +46,7 @@ export function Hero() {
             ref={videoRef}
           />
         ) : (
-          <PostLoader />
+          <Loader />
         )}
       </div>
     </section>
