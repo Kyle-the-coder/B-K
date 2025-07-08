@@ -1,35 +1,55 @@
-import { Outlet, useLocation, useNavigation } from "react-router-dom";
-import { Suspense } from "react"; // 🔥 Add Suspense
+import { Outlet, useNavigation } from "react-router-dom";
+import { Suspense, useEffect, useState } from "react";
 import { Nav } from "../components/Nav/Nav";
 import { Footer } from "../components/Footer/Footer";
 import upArrow from "../assets/icons/ogUpArrow.png";
 import { scrollToSection } from "../components/SmoothScroll";
-import { Loader } from "../components/Loader/Loader"; // 👈 optional custom spinner
+import { Loader } from "../components/Loader/Loader";
+import { db } from "../firebaseConfig";
+import { collection, getDocs } from "firebase/firestore";
+import { ClassesContext } from "../contexts/ClassesContext"; // 👈 Create this
 
 export function MainLayout() {
   const { state } = useNavigation();
+  const [classes, setClasses] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchClasses() {
+      try {
+        const querySnapshot = await getDocs(collection(db, "class"));
+        const data = querySnapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setClasses(data);
+      } catch (err) {
+        console.error("Error loading classes:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchClasses();
+  }, []);
+
+  if (state === "loading" || loading) {
+    return <Loader />; // 👈 Only show loader until both route & data are ready
+  }
 
   return (
-    <div className="main-container silver-bg">
-      <img
-        src={upArrow}
-        className="main-up-arrow"
-        onClick={() => scrollToSection("#nav")}
-      />
-      <Nav />
-
-      {/* ✅ Wrap lazy-loaded routes in Suspense */}
-      <Suspense fallback={<Loader />}>
-        {state === "loading" ? (
-          <Loader />
-        ) : (
-          <div>
-            <Outlet />
-          </div>
-        )}
-      </Suspense>
-
-      <Footer />
-    </div>
+    <ClassesContext.Provider value={classes}>
+      <div className="main-container silver-bg">
+        <img
+          src={upArrow}
+          className="main-up-arrow"
+          onClick={() => scrollToSection("#nav")}
+        />
+        <Nav />
+        <Suspense fallback={<Loader />}>
+          <Outlet />
+        </Suspense>
+        <Footer />
+      </div>
+    </ClassesContext.Provider>
   );
 }

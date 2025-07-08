@@ -13,7 +13,10 @@ export function Footer() {
       <img
         src={user}
         className="footer-login"
-        onClick={() => navigate("/login")}
+        onClick={() => {
+          navigate("/login");
+          window.scrollTo(0, 0);
+        }}
       />
       <div className="footer-blerb">
         <h1 className="archivo-font">Bianca and Kyle</h1>

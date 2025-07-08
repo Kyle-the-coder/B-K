@@ -1,42 +1,21 @@
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../../firebaseConfig";
 import DOMPurify from "dompurify";
+import { ClassesContext } from "../../../contexts/ClassesContext";
 import "./classesgrid.css";
 import { Loader } from "../../../components/Loader/Loader";
 
 export function ClassesGrid() {
+  const classes = useContext(ClassesContext); // ✅ Use context
   const [flyerIndex, setFlyerIndex] = useState(null);
-  const [classes, setClasses] = useState([]);
-  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    async function fetchClasses() {
-      try {
-        const querySnapshot = await getDocs(collection(db, "class"));
-        const classData = querySnapshot.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-          imgUrl: doc.data().imgUrl,
-        }));
-        setClasses(classData);
-      } catch (error) {
-        console.error("Error fetching classes:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchClasses();
-  }, []);
 
   function handleHover(index) {
     setFlyerIndex(index);
   }
 
-  if (loading) {
+  // ✅ Show loader only if classes aren't loaded yet
+  if (!classes.length) {
     return (
       <section className="cg-main-loading">
         <Loader />
@@ -68,7 +47,7 @@ export function ClassesGrid() {
             onMouseEnter={() => handleHover(index)}
             onClick={() => navigate(`singleClass/${info.id}`)}
           >
-            <img src={info.imgUrl} className="cg-img" alt={info.title} />
+            <img src={info.imgUrl} className="cg-img" alt={info.classTitle} />
             <p
               className="archivo-font silver-text"
               style={{ fontSize: "1.8rem" }}

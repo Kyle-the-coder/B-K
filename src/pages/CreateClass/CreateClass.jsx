@@ -192,7 +192,7 @@ export default function CreateClass() {
 
       const classId = await postClassToFirestore(classPayload);
       alert(`Class created successfully! ID: ${classId}`);
-      navigate("/");
+      navigate("/classes");
       window.scrollTo(0, 0);
     } catch (error) {
       console.error("Error submitting class:", error);
